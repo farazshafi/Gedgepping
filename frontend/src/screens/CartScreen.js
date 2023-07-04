@@ -17,8 +17,6 @@ const CartScreen = () => {
 
   const qty = location.search ? Number(location.search.split('=')[1]) : 1
 
-  
-
   const cart = useSelector((state) => state.cart)
   const { cartItems } = cart
 
