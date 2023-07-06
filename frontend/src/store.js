@@ -3,7 +3,12 @@ import { combineReducers } from 'redux';
 import thunk from 'redux-thunk';
 import { productListReducer, productDetailsReducer } from "./reducers/productReducers";
 import { cartReducer } from "./reducers/cartReducers";
-import { userLoginReducer, userRegisterReducer } from "./reducers/userReducers"
+import {
+  userLoginReducer,
+  userRegisterReducer,
+  userDetailsReducer,
+  userUpdateProfileReducer
+} from "./reducers/userReducers"
 
 const rootReducer = combineReducers({
   cart: cartReducer,  // Place cart reducer first
@@ -11,6 +16,8 @@ const rootReducer = combineReducers({
   productDetails: productDetailsReducer,
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
+  userDetails: userDetailsReducer,
+  userUpdateProfile: userUpdateProfileReducer
 });
 
 const cartItemsFromStorage = localStorage.getItem('cartItems')
@@ -22,7 +29,7 @@ const userInfoFromStorage = localStorage.getItem("userInfo")
 
 const initialState = {
   cart: { cartItems: cartItemsFromStorage },
-  userLogin : {userInfo : userInfoFromStorage}
+  userLogin: { userInfo: userInfoFromStorage }
 };
 
 const store = configureStore({
