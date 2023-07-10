@@ -22,13 +22,16 @@ const LoginScreen = () => {
 
     useEffect(() => {
         if (userInfo) {
-            navigate(redirect)
+          navigate(redirect)
         }
-    }, [navigate, userInfo, redirect])
+      }, [navigate, userInfo, redirect])
 
     const submitHandler = (e) => {
         e.preventDefault()
         dispatch(login(email, password))
+        if(redirect==="shipping"){
+            navigate("/shipping")
+        }
     }
 
     return (
@@ -48,7 +51,7 @@ const LoginScreen = () => {
                 </Form.Group>
 
                 <Form.Group controlId='password'>
-                    <Form.Label>Password Address</Form.Label>
+                    <Form.Label>Password</Form.Label>
                     <Form.Control
                         type='password'
                         placeholder='Enter password'

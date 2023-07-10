@@ -7,7 +7,7 @@ import { addToCart, removeFromCart } from '../actions/cartActions'
 
 
 const CartScreen = () => {
-  
+
   const params = useParams()
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -20,7 +20,9 @@ const CartScreen = () => {
   const cart = useSelector((state) => state.cart)
   const { cartItems } = cart
 
-  console.log(cartItems)
+  const userLogin = useSelector((state) => state.userLogin)
+  const { loading, error, userInfo } = userLogin
+
 
   useEffect(() => {
     if (productId) {
@@ -33,8 +35,14 @@ const CartScreen = () => {
   }
 
   const checkoutHandler = () => {
-    navigate('/login?redirect=shipping')
+    if (userInfo) {
+      navigate('/shipping')
+    } else {
+      navigate('/login?redirect=shipping')
+
+    }
   }
+
 
   return (
     <Row>
