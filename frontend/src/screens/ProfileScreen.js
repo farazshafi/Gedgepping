@@ -120,7 +120,7 @@ const ProfileScreen = () => {
                                 <th>TOTAL</th>
                                 <th>PAID</th>
                                 <th>DELIVERED</th>
-                                <th></th>
+                                <th>MORE</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -131,14 +131,14 @@ const ProfileScreen = () => {
                                     <td>{order.totalPrice}</td>
                                     <td>
                                         {order.isPaid ? (
-                                            order.paidAt.substring(0, 10)
+                                            <i className='fas fa-check' style={{ color: "green" }}></i>
                                         ) : (
                                             <i className='fas fa-times' style={{ color: "red" }}></i>
                                         )}
                                     </td>
                                     <td>
                                         {order.isDelivered ? (
-                                            order.deliveredAt.substring(0, 10)
+                                            <i className='fas fa-check' style={{ color: "green" }}></i>
                                         ) : (
                                             <i className='fas fa-times' style={{ color: "red" }}></i>
                                         )}
