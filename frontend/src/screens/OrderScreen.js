@@ -4,7 +4,10 @@ import { Button, Row, Col, ListGroup, Image, Card } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
-import { getOrderDetails } from '../actions/orderActions'
+import { getOrderDetails, payOrder } from '../actions/orderActions'
+import {PayPalScriptProvider, PayPalButtons} from "@paypal/react-paypal-js"
+import {ORDER_PAY_RESET} from "../constants/orderConstants"
+
 
 const OrderScreen = () => {
     const params = useParams()
@@ -14,6 +17,9 @@ const OrderScreen = () => {
 
     const orderDetails = useSelector((state) => state.orderDetails)
     const { order, loading, error } = orderDetails
+
+    const orderPay = useSelector((state) => state.orderPay)
+    const {loading:loadingPay, success:successPay } = orderPay
 
     if (!loading) {
         //   Calculate prices
@@ -27,8 +33,15 @@ const OrderScreen = () => {
     }
 
     useEffect(() => {
+        if(!order || successPay)
+        dispatch({type:ORDER_PAY_RESET})
         dispatch(getOrderDetails(orderId))
     }, [dispatch, orderId])
+
+    const handlePaymentSuccess = (data) => {
+        console.log(data)
+        dispatch(payOrder(orderId,data))
+    }
 
     return loading ? (
         <Loader />
@@ -140,6 +153,28 @@ const OrderScreen = () => {
                                     <Col>${order.totalPrice}</Col>
                                 </Row>
                             </ListGroup.Item>
+                            {!order.isPaid && (
+                                <ListGroup.Item>
+                                    {loadingPay ? <Loader /> : (
+                                        <PayPalScriptProvider options={{ clientId: "AZh5JZLx89ta-AchzJ8xDwecv4xUjI4EZT93gJ3fnUEJ2V52y_r1KjfK7J2sfbqfGUzRIMQElbvV2Shp" }}>
+                                            <PayPalButtons
+                                                createOrder={(data, actions) => {
+                                                    return actions.order.create({
+                                                        purchase_units: [
+                                                            {
+                                                                amount: {
+                                                                    value: order.totalPrice,
+                                                                },
+                                                            },
+                                                        ],
+                                                    });
+                                                }}
+                                                onApprove={handlePaymentSuccess}
+                                            />
+                                        </PayPalScriptProvider>
+                                    )}
+                                </ListGroup.Item>
+                            )}
                         </ListGroup>
                     </Card>
                 </Col>
