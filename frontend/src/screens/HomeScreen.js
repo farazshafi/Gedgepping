@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { Row, Col } from 'react-bootstrap'
-import { useParams } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import Product from '../components/Product'
 import { useDispatch, useSelector } from 'react-redux'
 import { listProducts } from '../actions/productActions'
@@ -8,7 +8,7 @@ import Loader from "../components/Loader"
 import Message from "../components/Message"
 import Paginate from '../components/Paginate'
 import ProductCarousel from '../components/ProductCarousel'
-
+import Meta from "../components/Meta"
 
 const HomeScreen = () => {
   const dispatch = useDispatch()
@@ -20,13 +20,25 @@ const HomeScreen = () => {
   const productList = useSelector((state) => state.productList)
   const { loading, error, products, page, pages } = productList
 
+  const userLogin = useSelector((state) => state.userLogin)
+  const { userInfo } = userLogin
+
   useEffect(() => {
     dispatch(listProducts(keyword, pageNumber))
   }, [dispatch, keyword, pageNumber])
 
   return (
     <>
-    {!keyword && <ProductCarousel />}
+      {userInfo && userInfo.isAdmin && (
+        <Meta title="Admin Dashboard" />
+      )}
+      {!keyword ? (
+        <ProductCarousel />
+      ) : (
+        <Link to='/' className='btn btn-light'>
+          Go Back
+        </Link>
+      )}
       <h1>Latest Products</h1>
       {loading ? (
         <Loader />

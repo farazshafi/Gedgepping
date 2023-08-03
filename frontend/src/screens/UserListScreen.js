@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react'
-import {useNavigate} from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { LinkContainer } from 'react-router-bootstrap'
 import { Table, Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import { deleteUser, listUsers } from '../actions/userActions'
+import Meta from '../components/Meta'
 
 const UserListScreen = () => {
     const dispatch = useDispatch()
@@ -18,24 +19,25 @@ const UserListScreen = () => {
     const { userInfo } = userLogin
 
     const userDelete = useSelector((state) => state.userDelete)
-    const { success:successDelete } = userDelete
+    const { success: successDelete } = userDelete
 
     useEffect(() => {
         if (userInfo && userInfo.isAdmin) {
             dispatch(listUsers())
-        }else{
+        } else {
             navigate("/login")
         }
     }, [dispatch, navigate, successDelete])
 
     const deleteHandler = (id) => {
-        if(window.confirm("Are you sure")){
+        if (window.confirm("Are you sure")) {
             dispatch(deleteUser(id))
         }
     }
 
     return (
         <>
+            <Meta title="Admin Dashboard" />
             <h1>Users</h1>
             {loading ? (
                 <Loader />

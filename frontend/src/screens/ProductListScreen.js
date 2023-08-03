@@ -8,6 +8,7 @@ import Paginate from '../components/Paginate'
 import Loader from '../components/Loader'
 import { listProducts, deleteProduct, createProduct } from '../actions/productActions'
 import { PRODUCT_CREATE_RESET } from "../constants/productConstants"
+import Meta from '../components/Meta'
 
 const ProductListScreen = () => {
     const dispatch = useDispatch()
@@ -36,7 +37,7 @@ const ProductListScreen = () => {
         if (successCreate) {
             navigate(`/admin/product/${createdProduct._id}/edit`)
         } else {
-            dispatch(listProducts("",pageNumber))
+            dispatch(listProducts("", pageNumber))
         }
     }, [dispatch, navigate, userInfo, successDelete, successCreate, createdProduct, pageNumber])
 
@@ -52,6 +53,7 @@ const ProductListScreen = () => {
 
     return (
         <>
+            <Meta title="Admin Dashboard" />
             <Row className='align-items-center'>
                 <Col>
                     <h1>Products</h1>
@@ -109,7 +111,7 @@ const ProductListScreen = () => {
                             ))}
                         </tbody>
                     </Table>
-                    <Paginate page={page} pages={pages} isAdmin={true}/>
+                    <Paginate page={page} pages={pages} isAdmin={true} />
                 </>
             )}
         </>

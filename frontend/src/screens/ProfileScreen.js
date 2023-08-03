@@ -7,6 +7,7 @@ import Loader from '../components/Loader'
 import { useLocation, useNavigate } from "react-router-dom"
 import { getUserDetails, updateUserProfile } from '../actions/userActions'
 import { listMyOrders } from "../actions/orderActions"
+import Meta from '../components/Meta'
 
 const ProfileScreen = () => {
     const [name, setName] = useState('')
@@ -57,6 +58,7 @@ const ProfileScreen = () => {
 
     return (
         <Row>
+            <Meta title="PROFILE"/>
             <Col md={3}>
                 <h2>User Profile</h2>
                 {message && <Message variant='danger'>{message}</Message>}
@@ -125,32 +127,34 @@ const ProfileScreen = () => {
                         </thead>
                         <tbody>
                             {orders.map((order) => (
-                                <tr key={order._id}>
-                                    <td>{order._id}</td>
-                                    <td>{order.createdAt.substring(0, 10)}</td>
-                                    <td>{order.totalPrice}</td>
-                                    <td>
-                                        {order.isPaid ? (
-                                            <i className='fas fa-check' style={{ color: "green" }}></i>
-                                        ) : (
-                                            <i className='fas fa-times' style={{ color: "red" }}></i>
-                                        )}
-                                    </td>
-                                    <td>
-                                        {order.isDelivered ? (
-                                            <i className='fas fa-check' style={{ color: "green" }}></i>
-                                        ) : (
-                                            <i className='fas fa-times' style={{ color: "red" }}></i>
-                                        )}
-                                    </td>
-                                    <td>
-                                        <LinkContainer to={`/order/${order._id}`}>
-                                            <Button className='btn-sm' variant='light'>
-                                                Details
-                                            </Button>
-                                        </LinkContainer>
-                                    </td>
-                                </tr>
+                                <>
+                                    <tr key={order._id}>
+                                        <td>{order._id}</td>
+                                        <td>{order.createdAt.substring(0, 10)}</td>
+                                        <td>{order.totalPrice}</td>
+                                        <td>
+                                            {order.isPaid ? (
+                                                <i className='fas fa-check' style={{ color: "green" }}></i>
+                                            ) : (
+                                                <i className='fas fa-times' style={{ color: "red" }}></i>
+                                            )}
+                                        </td>
+                                        <td>
+                                            {order.isDelivered ? (
+                                                <i className='fas fa-check' style={{ color: "green" }}></i>
+                                            ) : (
+                                                <i className='fas fa-times' style={{ color: "red" }}></i>
+                                            )}
+                                        </td>
+                                        <td>
+                                            <LinkContainer to={`/order/${order._id}`}>
+                                                <Button className='btn-sm' variant='light'>
+                                                    Details
+                                                </Button>
+                                            </LinkContainer>
+                                        </td>
+                                    </tr>
+                                </>
                             ))}
                         </tbody>
                     </Table>
