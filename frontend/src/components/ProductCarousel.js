@@ -16,19 +16,23 @@ const ProductCarousel = () => {
         dispatch(listTopProducts())
     }, [dispatch])
 
+    const isLargeScreen = window.matchMedia('(min-width: 1200px)').matches
+    const isMediumScreen = window.matchMedia('(min-width: 992px)').matches
+
     return loading ? (
         <Loader />
     ) : error ? (
         <Message variant='danger'>{error}</Message>
     ) : (
-        <Carousel pause='hover' className='bg-dark'>
+        <Carousel pause='hover' className='bg-dark' controls={isLargeScreen ? true : false}>
             {products.map((product) => (
                 <Carousel.Item key={product._id}>
                     <Link to={`/product/${product._id}`}>
-                        <Image src={product.image} alt={product.name} fluid />
+                        <Image id='carsoul-product-image' className='carsoul-product-image' src={product.image} alt={product.name} fluid />
                         <Carousel.Caption className='carousel-caption'>
                             <h2>
-                                {product.name} (${product.price})
+                                <span className='carsoul-product-name'>{product.name}</span>
+                                <span className='carsoul-product-price'> (${product.price})</span>
                             </h2>
                         </Carousel.Caption>
                     </Link>

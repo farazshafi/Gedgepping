@@ -1,24 +1,23 @@
 main {
-    min-height: 80vh;
+  min-height: 80vh;
 }
 h3 {
-    padding: 1rem 0;
-}
-  
-h1 {
-    font-size: 1.8rem;
-    padding: 1rem 0;
-}
-  
-h2 {
-    font-size: 1.4rem;
-    padding: 0.5rem 0;
-}
-  
-.rating span {
-    margin: 0.1rem;
+  padding: 1rem 0;
 }
 
+h1 {
+  font-size: 1.8rem;
+  padding: 1rem 0;
+}
+
+h2 {
+  font-size: 1.4rem;
+  padding: 0.5rem 0;
+}
+
+.rating span {
+  margin: 0.1rem;
+}
 
 /* carousel */
 .carousel-item-next,
@@ -35,12 +34,54 @@ h2 {
   color: #fff;
 }
 
-.carousel img {
-  width: 300px;
-  padding: 30px;
-  margin: 40px;
-  border-radius: 50%;
-}
 .carousel a {
   margin: 0 auto;
+}
+
+
+/*small resolution */
+@media (max-width: 767px) {
+  .carsoul-product-name {
+    font-size: 6px; /* Adjust the font size as needed */
+  }
+  .carsoul-product-price {
+    display: none;
+  }
+  #carsoul-product-image{
+    margin-left: 5%;
+  }
+  .carousel img {
+    width: 300px;
+    padding: 30px;
+    margin: 40px;
+  }
+}
+
+/* medium resolution */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .carsoul-product-name {
+    font-size: 15px; /* Adjust the font size as needed */
+  }
+  .carsoul-product-name {
+    display: none;
+  }
+  .carousel img {
+    width: 300px;
+    padding: 30px;
+    margin: 40px;
+    border-radius: 50%;
+  }
+}
+
+/*large resolution*/
+@media (min-width: 1024px) {
+  .carsoul-product-name {
+    font-size: 20px; /* Adjust the font size as needed */
+  }
+  .carousel img {
+    width: 300px;
+    padding: 30px;
+    margin: 40px;
+    border-radius: 50%;
+  }
 }
