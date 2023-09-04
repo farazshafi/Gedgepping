@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { LinkContainer } from 'react-router-bootstrap'
-import {useNavigate} from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { Table, Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
@@ -9,26 +9,26 @@ import { listOrders } from '../actions/orderActions'
 import Meta from '../components/Meta'
 
 const OrderListScreen = () => {
-    const dispatch = useDispatch()
-    const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
-    const orderList = useSelector((state) => state.orderList)
-    const { loading, error, orders } = orderList
+  const orderList = useSelector((state) => state.orderList)
+  const { loading, error, orders } = orderList
 
-    const userLogin = useSelector((state) => state.userLogin)
-    const { userInfo } = userLogin
+  const userLogin = useSelector((state) => state.userLogin)
+  const { userInfo } = userLogin
 
-    useEffect(() => {
-        if (userInfo && userInfo.isAdmin) {
-            dispatch(listOrders())
-        } else {
-            navigate('/login')
-        }
-    }, [dispatch, navigate, userInfo])
+  useEffect(() => {
+    if (userInfo && userInfo.isAdmin) {
+      dispatch(listOrders())
+    } else {
+      navigate('/login')
+    }
+  }, [dispatch, navigate, userInfo])
 
-    return (
+  return (
     <>
-    <Meta title="Admin Dashboard"/>
+      <Meta title="Admin Dashboard" />
       <h1>Orders</h1>
       {loading ? (
         <Loader />
@@ -50,20 +50,26 @@ const OrderListScreen = () => {
           <tbody>
             {orders.map((order) => (
               <tr key={order._id}>
+                {/* Order ID  */}
                 <td>{order._id}</td>
+                {/* User ID */}
                 <td>{order.user && order.user}</td>
+                {/* Date */}
                 <td>{order.createdAt.substring(0, 10)}</td>
+                {/* Total */}
                 <td>${order.totalPrice}</td>
+                {/* Paid  */}
                 <td>
                   {order.isPaid ? (
-                    order.paidAt.substring(0, 10)
+                    <i className='fas fa-check' style={{ color: "green" }}></i>
                   ) : (
                     <i className='fas fa-times' style={{ color: 'red' }}></i>
                   )}
                 </td>
+                {/* Delivered  */}
                 <td>
                   {order.isDelivered ? (
-                    order.deliveredAt.substring(0, 10)
+                    <i className='fas fa-check' style={{ color: "green" }}></i>
                   ) : (
                     <i className='fas fa-times' style={{ color: 'red' }}></i>
                   )}

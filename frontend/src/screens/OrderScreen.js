@@ -9,9 +9,6 @@ import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js"
 import { ORDER_PAY_RESET, ORDER_DELIVER_RESET } from "../constants/orderConstants"
 
 
-//git old 
-//hello
-
 const OrderScreen = () => {
     const params = useParams()
     const navigate = useNavigate()
@@ -50,7 +47,7 @@ const OrderScreen = () => {
             dispatch({ type: ORDER_PAY_RESET })
         dispatch({ type: ORDER_DELIVER_RESET })
         dispatch(getOrderDetails(orderId))
-    }, [dispatch, orderId, successPay, successDeliver, order])
+    }, [dispatch, orderId, successPay, successDeliver])
 
     const handlePaymentSuccess = (data) => {
         dispatch(payOrder(orderId, data))
