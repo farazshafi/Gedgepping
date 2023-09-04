@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Loader from './Loader'
 import Message from './Message'
 import { listTopProducts } from '../actions/productActions'
+import Rating from './Rating'
 
 const ProductCarousel = () => {
     const dispatch = useDispatch()
@@ -25,7 +26,7 @@ const ProductCarousel = () => {
         <Message variant='danger'>{error}</Message>
     ) : (
         <Carousel pause='hover' className='bg-dark' controls={isLargeScreen ? true : false}>
-            {products.map((product) => (
+            {products.map((product, index) => (
                 <Carousel.Item key={product._id}>
                     <Link to={`/product/${product._id}`}>
                         <Image id='carsoul-product-image' className='carsoul-product-image' src={product.image} alt={product.name} fluid />
@@ -35,6 +36,12 @@ const ProductCarousel = () => {
                                 <span className='carsoul-product-price'> (${product.price})</span>
                             </h2>
                         </Carousel.Caption>
+                        {/* <Rating
+                            textColor={"white"}
+                            value={product.rating}
+                            text={`${product.numReviews} reviews`}
+                        /> */}
+                        <p id='carsoul-rating'>#{index + 1}</p>
                     </Link>
                 </Carousel.Item>
             ))}
