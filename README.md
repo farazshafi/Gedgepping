@@ -1,9 +1,13 @@
 # Gedgepping
-Ecommerce Gadget shopping Project
+Gadgets E-Commerce with Admin Control
+
+Live Link
+
 https://gedgepping.onrender.com/
 The server needs to start, wait 1 minute
 
 Welcome to Gedgepping, where gadget enthusiasts meet a cutting-edge e-commerce platform designed to revolutionize your online shopping experience. In this unique project, I've poured my passion and expertise into creating a user-friendly MERN (MongoDB, Express.js, React, and Node.js) e-commerce platform tailored exclusively for gadget aficionados.
+
 
 Screenshots 
 
@@ -45,9 +49,6 @@ Admin Mark as Delivered
 
 
 Features
-Gadgets E-Commerce with Admin Control
-
-Features
 1. Gadgets Galore
 Gedgepping offers a vast catalog of the latest gadgets, ensuring that you can easily find the perfect tech companion for your needs. Whether you're into smartphones, laptops, wearables, or any other electronic marvel, Gedgepping has you covered.
 
@@ -55,7 +56,7 @@ Gedgepping offers a vast catalog of the latest gadgets, ensuring that you can ea
 This platform is built on RESTful APIs, providing a robust, structured backend architecture. This allows for efficient data retrieval and smooth interactions with the database.
 
 4. Admin Control
-As the sole developer and admin, you have complete control over the platform. Manage product listings, user accounts and order management.
+As the sole developer and admin, you have complete control over the platform. Manage product listings, user accounts, and order management.
 
 5.  Search
 Find your desired gadgets quickly using our search functionality
